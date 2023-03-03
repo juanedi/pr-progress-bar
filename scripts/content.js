@@ -26,7 +26,7 @@ function onPageLoad() {
 }
 
 function percentage(commitIndex, total) {
-  return Math.floor(((commitIndex + 1) * 100) / total);
+  return ((commitIndex + 1) * 100) / total;
 }
 
 function renderProgressBar(currentCommitIndex, commitCount) {
@@ -50,11 +50,11 @@ function renderProgressBar(currentCommitIndex, commitCount) {
   progressBarContainer.style["padding"] = "14px 0 4px";
   progressBarContainer.style["position"] = "relative";
 
-  progressBar.style["height"] = "2px";
+  progressBar.style["height"] = "1px";
   progressBar.style["width"] = "100%";
   progressBar.style["background"] = GRAY;
   progressBar.style["position"] = "absolute";
-  progressBar.style["top"] = "calc(50% + 4px)";
+  progressBar.style["top"] = "16px";
 
   progressBarInner.style["height"] = "100%";
   progressBarInner.style["width"] = `${percentage(
@@ -65,9 +65,9 @@ function renderProgressBar(currentCommitIndex, commitCount) {
 
   for (i = 0; i < commitCount; i++) {
     const commit = document.createElement("div");
-    commit.style["height"] = "16px";
-    commit.style["width"] = "16px";
-    commit.style["border-radius"] = "8px";
+    commit.style["height"] = "6px";
+    commit.style["width"] = "6px";
+    commit.style["border-radius"] = "3px";
 
     if (i <= currentCommitIndex) {
       commit.classList.add("pr-review-progress-bar--reviewed");
