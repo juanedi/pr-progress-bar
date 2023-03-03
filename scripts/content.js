@@ -29,45 +29,65 @@ function percentage(commitIndex, total) {
   return ((commitIndex + 1) * 100) / total;
 }
 
+function styledDiv(styles, className) {
+  const node = document.createElement("div");
+  for (property in styles) {
+    node.style[property] = styles[property];
+  }
+
+  if (className) {
+    node.classList.add(className);
+  }
+
+  return node;
+}
+
 function renderProgressBar(currentCommitIndex, commitCount) {
   const panelAbove = document.querySelector(".commit .commit-title");
 
-  const progressBarContainer = document.createElement("div");
-  progressBarContainer.classList.add("pr-review-progress-bar");
+  const progressBarContainer = styledDiv(
+    {
+      width: "100%",
+      display: "flex",
+      "justify-content": "space-between",
+      padding: "14px 0 4px",
+      position: "relative",
+    },
+    "pr-review-progress-bar"
+  );
   panelAbove.insertAdjacentElement("afterend", progressBarContainer);
 
-  const progressBar = document.createElement("div");
-  progressBar.classList.add("pr-review-progress-bar--bar");
+  const progressBar = styledDiv(
+    {
+      height: "1px",
+      width: "100%",
+      background: GRAY,
+      position: "absolute",
+      top: "16px",
+    },
+    "pr-review-progress-bar--done"
+  );
   progressBarContainer.appendChild(progressBar);
 
-  const progressBarInner = document.createElement("div");
-  progressBarInner.classList.add("pr-review-progress-bar--done");
+  const progressBarInner = styledDiv(
+    {
+      height: "100%",
+      width: `${percentage(currentCommitIndex, commitCount)}%`,
+      background: GREEN,
+    },
+    "pr-review-progress-bar--done"
+  );
   progressBar.appendChild(progressBarInner);
 
-  progressBarContainer.style["width"] = "100%";
-  progressBarContainer.style["display"] = "flex";
-  progressBarContainer.style["justify-content"] = "space-between";
-  progressBarContainer.style["padding"] = "14px 0 4px";
-  progressBarContainer.style["position"] = "relative";
-
-  progressBar.style["height"] = "1px";
-  progressBar.style["width"] = "100%";
-  progressBar.style["background"] = GRAY;
-  progressBar.style["position"] = "absolute";
-  progressBar.style["top"] = "16px";
-
-  progressBarInner.style["height"] = "100%";
-  progressBarInner.style["width"] = `${percentage(
-    currentCommitIndex,
-    commitCount
-  )}%`;
-  progressBarInner.style["background"] = GREEN;
-
   for (i = 0; i < commitCount; i++) {
-    const commit = document.createElement("div");
-    commit.style["height"] = "6px";
-    commit.style["width"] = "6px";
-    commit.style["border-radius"] = "3px";
+    const commit = styledDiv(
+      {
+        height: "6px",
+        width: "6px",
+        "border-radius": "3px",
+      },
+      "pr--review-progress-bar--commit"
+    );
 
     if (i <= currentCommitIndex) {
       commit.classList.add("pr-review-progress-bar--reviewed");
