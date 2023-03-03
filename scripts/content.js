@@ -8,7 +8,8 @@ const allCommits = Array.from(
 ).map((link) => commitShaFromGithubPath(link.attributes.href.value));
 
 const currentCommit = commitShaFromGithubPath(window.location.pathname);
+const currentCommitIndex = allCommits.findIndex((c) => c == currentCommit);
 
 console.log("Total commit count:", allCommits.length);
 console.log("Current commit id:", currentCommit);
-console.log("All commits", allCommits);
+console.log("Index of current commit", currentCommitIndex);
