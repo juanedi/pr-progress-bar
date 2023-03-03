@@ -11,10 +11,9 @@
   },
   "content_scripts": [
     {
-      "js": [
-        "scripts/content.js"
-      ],
+      "js": ["scripts/content.js"],
       "matches": [
+        "https://github.com/*/*/pull/*",
         "https://github.com/*/*/pull/*/commits/*"
       ]
     }
