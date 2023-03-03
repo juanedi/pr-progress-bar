@@ -3,10 +3,9 @@ function commitShaFromGithubPath(pathname) {
   return match ? match[1] : null;
 }
 
-const allCommits =
-      Array
-      .from(document.querySelectorAll(".js-diffbar-range-list a"))
-      .map((link) => commitShaFromGithubPath(link.attributes.href.value));
+const allCommits = Array.from(
+  document.querySelectorAll(".js-diffbar-range-list a")
+).map((link) => commitShaFromGithubPath(link.attributes.href.value));
 
 const currentCommit = commitShaFromGithubPath(window.location.pathname);
 
