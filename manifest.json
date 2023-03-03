@@ -13,6 +13,7 @@
     {
       "js": ["scripts/content.js"],
       "matches": [
+        "https://github.com/*/*/pulls/*",
         "https://github.com/*/*/pull/*",
         "https://github.com/*/*/pull/*/commits/*"
       ]
