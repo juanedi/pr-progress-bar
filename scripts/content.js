@@ -1,22 +1,27 @@
-function commitShaFromGithubPath(pathname) {
+function commitShaFromHref(pathname) {
   const pattern = /.*\/.*\/pull\/[0-9]+\/commits\/([a-f0-9]{40})$/;
   const match = pathname.match(pattern);
   return match ? match[1] : null;
 }
 
 function onPageLoad() {
-  const currentCommit = commitShaFromGithubPath(window.location.pathname);
+  const currentCommit = commitShaFromHref(window.location.pathname);
   if (currentCommit) {
     window.requestAnimationFrame(() => {
       const allCommits = Array.from(
         document.querySelectorAll(".js-diffbar-range-list a")
-      ).map((link) => commitShaFromGithubPath(link.attributes.href.value));
+      ).map((link) => {
+        return {
+          href: link.attributes.href.value,
+          sha: commitShaFromHref(link.attributes.href.value),
+        };
+      });
 
       const currentCommitIndex = allCommits.findIndex(
-        (c) => c == currentCommit
+        (c) => c.sha == currentCommit
       );
 
-      renderProgressBar(currentCommitIndex, allCommits.length);
+      renderProgressBar(currentCommitIndex, allCommits);
     });
   }
 }
@@ -25,7 +30,8 @@ function percentage(commitIndex, total) {
   return ((commitIndex + 1) * 100) / total;
 }
 
-function renderProgressBar(currentCommitIndex, commitCount) {
+function renderProgressBar(currentCommitIndex, allCommits) {
+  const commitCount = allCommits.length;
   const titleRow = document.querySelector(".commit .commit-title");
   const descriptionRow = document.querySelector(".commit .commit-desc");
 
@@ -35,21 +41,25 @@ function renderProgressBar(currentCommitIndex, commitCount) {
   ol.classList.add("pr-progress-bar--container");
   previousPanel.insertAdjacentElement("afterend", ol);
 
-  for (i = 0; i < commitCount; i++) {
-    const commit = document.createElement("li");
-    commit.classList.add("pr-progress-bar--commit");
+  allCommits.forEach((commit, i) => {
+    const segment = document.createElement("li");
+    segment.classList.add("pr-progress-bar--commit");
 
     if (i <= currentCommitIndex) {
-      commit.classList.add("pr-progress-bar--commit-reviewed");
+      segment.classList.add("pr-progress-bar--commit-reviewed");
     } else {
-      commit.classList.add("pr-progress-bar--commit-pending");
+      segment.classList.add("pr-progress-bar--commit-pending");
     }
-    ol.appendChild(commit);
+    ol.appendChild(segment);
 
-    const dot = document.createElement("svg");
+    const dot = document.createElement("a");
+    dot.href = commit.href;
+    dot.title = commit.message;
     dot.classList.add("pr-progress-bar--icon");
-    commit.appendChild(dot);
-  }
+    segment.appendChild(dot);
+  });
+
+  for (i = 0; i < commitCount; i++) {}
 }
 
 onPageLoad();
