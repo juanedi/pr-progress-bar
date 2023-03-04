@@ -1,7 +1,3 @@
-const GREEN = "#3fb950";
-const RED = "#f85149";
-const GRAY = "rgba(56,139,253,0.15)";
-
 function commitShaFromGithubPath(pathname) {
   const pattern = /.*\/.*\/pull\/[0-9]+\/commits\/([a-f0-9]{40})$/;
   const match = pathname.match(pattern);
@@ -29,74 +25,27 @@ function percentage(commitIndex, total) {
   return ((commitIndex + 1) * 100) / total;
 }
 
-function styledDiv(styles, className) {
-  const node = document.createElement("div");
-  for (property in styles) {
-    node.style[property] = styles[property];
-  }
-
-  if (className) {
-    node.classList.add(className);
-  }
-
-  return node;
-}
-
 function renderProgressBar(currentCommitIndex, commitCount) {
-  const panelAbove = document.querySelector(".commit .commit-title");
+  const previousPanel = document.querySelector(".commit .commit-title");
 
-  const progressBarContainer = styledDiv(
-    {
-      width: "100%",
-      display: "flex",
-      "justify-content": "space-between",
-      padding: "14px 0 4px",
-      position: "relative",
-    },
-    "pr-review-progress-bar"
-  );
-  panelAbove.insertAdjacentElement("afterend", progressBarContainer);
-
-  const progressBar = styledDiv(
-    {
-      height: "1px",
-      width: "100%",
-      background: GRAY,
-      position: "absolute",
-      top: "16px",
-    },
-    "pr-review-progress-bar--done"
-  );
-  progressBarContainer.appendChild(progressBar);
-
-  const progressBarInner = styledDiv(
-    {
-      height: "100%",
-      width: `${percentage(currentCommitIndex, commitCount)}%`,
-      background: GREEN,
-    },
-    "pr-review-progress-bar--done"
-  );
-  progressBar.appendChild(progressBarInner);
+  const ol = document.createElement("ol");
+  ol.classList.add("pr-progress-bar--container");
+  previousPanel.insertAdjacentElement("afterend", ol);
 
   for (i = 0; i < commitCount; i++) {
-    const commit = styledDiv(
-      {
-        height: "6px",
-        width: "6px",
-        "border-radius": "3px",
-      },
-      "pr--review-progress-bar--commit"
-    );
+    const commit = document.createElement("li");
+    commit.classList.add("pr-progress-bar--commit");
 
     if (i <= currentCommitIndex) {
-      commit.classList.add("pr-review-progress-bar--reviewed");
-      commit.style["background"] = GREEN;
+      commit.classList.add("pr-progress-bar--commit-reviewed");
     } else {
-      commit.classList.add("pr-review-progress-bar--pending");
-      commit.style["background"] = GRAY;
+      commit.classList.add("pr-progress-bar--commit-pending");
     }
-    progressBarContainer.appendChild(commit);
+    ol.appendChild(commit);
+
+    const dot = document.createElement("svg");
+    dot.classList.add("pr-progress-bar--icon");
+    commit.appendChild(dot);
   }
 }
 
@@ -110,3 +59,5 @@ new MutationObserver(() => {
     onPageLoad();
   }
 }).observe(document, { subtree: true, childList: true });
+
+chrome.runtime.sendMessage("inject-css");

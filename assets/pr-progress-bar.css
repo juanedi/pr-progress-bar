@@ -1,0 +1,63 @@
+:root {
+  --pr-progress-bar-green: #3fb950;
+  --pr-progress-bar-gray: rgba(32, 43, 65);
+}
+
+.pr-progress-bar--container {
+  margin: 20px 0;
+
+  list-style: none !important;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+
+.pr-progress-bar--commit {
+  position: relative;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pr-progress-bar--commit:before {
+  content: "";
+  height: 2px;
+  background-color: var(--pr-progress-bar-gray);
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  left: -50%;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: all 0.25s ease-out;
+}
+
+.pr-progress-bar--commit:first-child:before {
+  display: none;
+}
+
+.pr-progress-bar--icon {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  max-width: 100%;
+  z-index: 10;
+  position: relative;
+  transition: all 0.25s ease-out;
+
+  display: inline-block;
+}
+
+.pr-progress-bar--commit-reviewed:before {
+  background-color: var(--pr-progress-bar-green);
+}
+
+.pr-progress-bar--commit-reviewed .pr-progress-bar--icon {
+  background-color: var(--pr-progress-bar-green);
+}
+
+.pr-progress-bar--commit-pending .pr-progress-bar--icon {
+  background-color: var(--pr-progress-bar-gray);
+}
