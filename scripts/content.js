@@ -26,7 +26,10 @@ function percentage(commitIndex, total) {
 }
 
 function renderProgressBar(currentCommitIndex, commitCount) {
-  const previousPanel = document.querySelector(".commit .commit-title");
+  const titleRow = document.querySelector(".commit .commit-title");
+  const descriptionRow = document.querySelector(".commit .commit-desc");
+
+  const previousPanel = descriptionRow || titleRow;
 
   const ol = document.createElement("ol");
   ol.classList.add("pr-progress-bar--container");

@@ -4,7 +4,7 @@
 }
 
 .pr-progress-bar--container {
-  margin: 20px 0;
+  margin: 20px 0 12px 0;
 
   list-style: none !important;
   display: flex;
