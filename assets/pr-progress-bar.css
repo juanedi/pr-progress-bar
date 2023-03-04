@@ -1,6 +1,7 @@
 :root {
-  --pr-progress-bar-green: #3fb950;
-  --pr-progress-bar-gray: rgba(32, 43, 65);
+  --pr-progress-bar-reviewed: #28432b;
+  --pr-progress-bar-current: #3fb950;
+  --pr-progress-bar-pending: #202b41;
 }
 
 .pr-progress-bar--container {
@@ -24,7 +25,7 @@
 .pr-progress-bar--commit:before {
   content: "";
   height: 2px;
-  background-color: var(--pr-progress-bar-gray);
+  background-color: var(--pr-progress-bar-pending);
   position: absolute;
   z-index: 1;
   width: 100%;
@@ -50,14 +51,19 @@
   display: inline-block;
 }
 
-.pr-progress-bar--commit-reviewed:before {
-  background-color: var(--pr-progress-bar-green);
+.pr-progress-bar--commit-reviewed:before,
+.pr-progress-bar--commit-current:before {
+  background-color: var(--pr-progress-bar-reviewed);
 }
 
 .pr-progress-bar--commit-reviewed .pr-progress-bar--icon {
-  background-color: var(--pr-progress-bar-green);
+  background-color: var(--pr-progress-bar-reviewed);
+}
+
+.pr-progress-bar--commit-current .pr-progress-bar--icon {
+  background-color: var(--pr-progress-bar-current);
 }
 
 .pr-progress-bar--commit-pending .pr-progress-bar--icon {
-  background-color: var(--pr-progress-bar-gray);
+  background-color: var(--pr-progress-bar-pending);
 }

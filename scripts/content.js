@@ -45,8 +45,10 @@ function renderProgressBar(currentCommitIndex, allCommits) {
     const segment = document.createElement("li");
     segment.classList.add("pr-progress-bar--commit");
 
-    if (i <= currentCommitIndex) {
+    if (i < currentCommitIndex) {
       segment.classList.add("pr-progress-bar--commit-reviewed");
+    } else if (i == currentCommitIndex) {
+      segment.classList.add("pr-progress-bar--commit-current");
     } else {
       segment.classList.add("pr-progress-bar--commit-pending");
     }
@@ -54,7 +56,6 @@ function renderProgressBar(currentCommitIndex, allCommits) {
 
     const dot = document.createElement("a");
     dot.href = commit.href;
-    dot.title = commit.message;
     dot.classList.add("pr-progress-bar--icon");
     segment.appendChild(dot);
   });
