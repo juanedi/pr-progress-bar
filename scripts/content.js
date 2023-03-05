@@ -31,6 +31,11 @@ function percentage(commitIndex, total) {
 }
 
 function renderProgressBar(currentCommitIndex, allCommits) {
+  preExisting = document.getElementById("pr-progress-bar--container");
+  if (preExisting) {
+    preExisting.remove();
+  }
+
   const commitCount = allCommits.length;
   const titleRow = document.querySelector(".commit .commit-title");
   const descriptionRow = document.querySelector(".commit .commit-desc");
@@ -38,7 +43,7 @@ function renderProgressBar(currentCommitIndex, allCommits) {
   const previousPanel = descriptionRow || titleRow;
 
   const ol = document.createElement("ol");
-  ol.classList.add("pr-progress-bar--container");
+  ol.id = "pr-progress-bar--container";
   previousPanel.insertAdjacentElement("afterend", ol);
 
   allCommits.forEach((commit, i) => {
