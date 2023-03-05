@@ -1,3 +1,5 @@
+PROGRESS_BAR_ID = "pr-progress-bar--container";
+
 function commitShaFromHref(pathname) {
   const pattern = /.*\/.*\/pull\/[0-9]+\/commits\/([a-f0-9]{40})$/;
   const match = pathname.match(pattern);
@@ -21,7 +23,13 @@ function onPageLoad() {
         (c) => c.sha == currentCommit
       );
 
-      renderProgressBar(currentCommitIndex, allCommits);
+      preExisting = document.getElementById(PROGRESS_BAR_ID);
+      if (preExisting) {
+        preExisting.remove();
+      }
+
+      const progressBar = buildProgressBar(currentCommitIndex, allCommits);
+      attach(progressBar);
     });
   }
 }
@@ -30,21 +38,9 @@ function percentage(commitIndex, total) {
   return ((commitIndex + 1) * 100) / total;
 }
 
-function renderProgressBar(currentCommitIndex, allCommits) {
-  preExisting = document.getElementById("pr-progress-bar--container");
-  if (preExisting) {
-    preExisting.remove();
-  }
-
-  const commitCount = allCommits.length;
-  const titleRow = document.querySelector(".commit .commit-title");
-  const descriptionRow = document.querySelector(".commit .commit-desc");
-
-  const previousPanel = descriptionRow || titleRow;
-
+function buildProgressBar(currentCommitIndex, allCommits) {
   const ol = document.createElement("ol");
-  ol.id = "pr-progress-bar--container";
-  previousPanel.insertAdjacentElement("afterend", ol);
+  ol.id = PROGRESS_BAR_ID;
 
   allCommits.forEach((commit, i) => {
     const segment = document.createElement("li");
@@ -65,7 +61,15 @@ function renderProgressBar(currentCommitIndex, allCommits) {
     segment.appendChild(dot);
   });
 
-  for (i = 0; i < commitCount; i++) {}
+  return ol;
+}
+
+function attach(progressBar) {
+  const titleRow = document.querySelector(".commit .commit-title");
+  const descriptionRow = document.querySelector(".commit .commit-desc");
+
+  const previousPanel = descriptionRow || titleRow;
+  previousPanel.insertAdjacentElement("afterend", progressBar);
 }
 
 onPageLoad();
