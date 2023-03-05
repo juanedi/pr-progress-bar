@@ -1,7 +1,15 @@
 :root {
-  --pr-progress-bar-reviewed: #28432b;
+  --pr-progress-bar-reviewed: #abf2bc;
   --pr-progress-bar-current: #3fb950;
-  --pr-progress-bar-pending: #202b41;
+  --pr-progress-bar-pending: #c4defc;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --pr-progress-bar-reviewed: #28432b;
+    --pr-progress-bar-current: #3fb950;
+    --pr-progress-bar-pending: #202b41;
+  }
 }
 
 .pr-progress-bar--container {
