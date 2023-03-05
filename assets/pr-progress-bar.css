@@ -2,6 +2,7 @@
   --pr-progress-bar-reviewed: #abf2bc;
   --pr-progress-bar-current: #3fb950;
   --pr-progress-bar-pending: #c4defc;
+  --pr-progress-bar-hover: #0969da;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -9,6 +10,7 @@
     --pr-progress-bar-reviewed: #28432b;
     --pr-progress-bar-current: #3fb950;
     --pr-progress-bar-pending: #202b41;
+    --pr-progress-bar-hover: #ffffff;
   }
 }
 #pr-progress-bar--container {
@@ -21,11 +23,24 @@
   margin-top: 14px;
   height: 18px;
   overflow: hidden;
-  border-radius: 6px;
 }
 
 .pr-progress-bar--commit {
   width: 100%;
+  box-sizing: border-box;
+  border: 2px solid transparent;
+}
+
+.pr-progress-bar--commit:first-child {
+  border-radius: 6px 0 0 6px;
+}
+
+.pr-progress-bar--commit:last-child {
+  border-radius: 0 6px 6px 0;
+}
+
+.pr-progress-bar--commit:hover {
+  border-color: var(--pr-progress-bar-hover);
 }
 
 .pr-progress-bar--link {
