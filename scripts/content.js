@@ -55,10 +55,10 @@ function buildProgressBar(currentCommitIndex, allCommits) {
     }
     ol.appendChild(segment);
 
-    const dot = document.createElement("a");
-    dot.href = commit.href;
-    dot.classList.add("pr-progress-bar--icon");
-    segment.appendChild(dot);
+    const link = document.createElement("a");
+    link.href = commit.href;
+    link.classList.add("pr-progress-bar--link");
+    segment.appendChild(link);
   });
 
   return ol;

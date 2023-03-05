@@ -11,67 +11,37 @@
     --pr-progress-bar-pending: #202b41;
   }
 }
-
 #pr-progress-bar--container {
-  margin: 20px 0 12px 0;
-
-  list-style: none !important;
+  list-style: none;
   display: flex;
-  justify-content: space-between;
-  position: relative;
+  justify-content: space-around;
+  width: 100%;
+  height: 40px;
+  gap: 2px;
+  margin-top: 14px;
+  height: 18px;
+  overflow: hidden;
+  border-radius: 6px;
 }
 
 .pr-progress-bar--commit {
-  position: relative;
   width: 100%;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.pr-progress-bar--commit:before {
-  content: "";
-  height: 2px;
-  background-color: var(--pr-progress-bar-pending);
-  position: absolute;
-  z-index: 1;
+.pr-progress-bar--link {
   width: 100%;
-  left: -50%;
-  top: 50%;
-  transform: translateY(-50%);
-  transition: all 0.25s ease-out;
+  height: 100%;
+  display: block;
 }
 
-.pr-progress-bar--commit:first-child:before {
-  display: none;
-}
-
-.pr-progress-bar--icon {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  max-width: 100%;
-  z-index: 10;
-  position: relative;
-  transition: all 0.25s ease-out;
-
-  display: inline-block;
-}
-
-.pr-progress-bar--commit-reviewed:before,
-.pr-progress-bar--commit-current:before {
+.pr-progress-bar--commit-reviewed {
   background-color: var(--pr-progress-bar-reviewed);
 }
 
-.pr-progress-bar--commit-reviewed .pr-progress-bar--icon {
-  background-color: var(--pr-progress-bar-reviewed);
-}
-
-.pr-progress-bar--commit-current .pr-progress-bar--icon {
+.pr-progress-bar--commit-current {
   background-color: var(--pr-progress-bar-current);
 }
 
-.pr-progress-bar--commit-pending .pr-progress-bar--icon {
+.pr-progress-bar--commit-pending {
   background-color: var(--pr-progress-bar-pending);
 }
