@@ -13,9 +13,11 @@ function onPageLoad() {
       const allCommits = Array.from(
         document.querySelectorAll(".js-diffbar-range-list a")
       ).map((link) => {
+        const messageNode = link.querySelector(".text-emphasized");
         return {
           href: link.attributes.href.value,
           sha: commitShaFromHref(link.attributes.href.value),
+          message: messageNode ? messageNode.textContent.trim() : "",
         };
       });
 
@@ -58,6 +60,7 @@ function buildProgressBar(currentCommitIndex, allCommits) {
     const link = document.createElement("a");
     link.href = commit.href;
     link.classList.add("pr-progress-bar--link");
+    link.title = commit.message;
     segment.appendChild(link);
   });
 
