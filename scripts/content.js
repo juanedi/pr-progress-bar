@@ -60,7 +60,7 @@ function buildProgressBar(currentCommitIndex, allCommits) {
     const link = document.createElement("a");
     link.href = commit.href;
     link.classList.add("pr-progress-bar--link");
-    link.title = commit.message;
+    link.setAttribute("alt", commit.message);
     segment.appendChild(link);
   });
 
