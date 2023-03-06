@@ -3,6 +3,8 @@
   --pr-progress-bar-current: #3fb950;
   --pr-progress-bar-pending: #c4defc;
   --pr-progress-bar-hover: #0969da;
+
+  --pr-progress-bar-tooltip-background: #24292f;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -64,7 +66,6 @@
   position: relative;
 }
 
-/* TODO: colors for light theme */
 .pr-progress-bar--link:hover::after {
   content: attr(alt);
   background: var(--pr-progress-bar-tooltip-background);
