@@ -16,7 +16,11 @@ TL;DR:
 
 ## 👓 How does it look?
 
-<img width="3271" alt="Screen Shot 2023-03-06 at 17 33 24" src="https://user-images.githubusercontent.com/753421/223224357-0d53ddbd-85a7-460c-a68a-e21d0c540d73.png">
+
+<img width="3231" alt="Screen Shot 2023-03-06 at 17 54 43" src="https://user-images.githubusercontent.com/753421/223228522-19c3c6bb-f1d3-432c-b0f8-89d5fb64bdff.png">
+<img width="3231" alt="Screen Shot 2023-03-06 at 17 54 31" src="https://user-images.githubusercontent.com/753421/223228528-a69d4d38-492a-45ea-a8cf-56dc7d44e672.png">
+
+
 
 ## Did you make the logo?
 
