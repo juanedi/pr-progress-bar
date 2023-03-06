@@ -29,8 +29,6 @@
 
 .pr-progress-bar--commit {
   width: 100%;
-  box-sizing: border-box;
-  border: 2px solid transparent;
 }
 
 .pr-progress-bar--commit:first-child {
@@ -39,11 +37,6 @@
 
 .pr-progress-bar--commit:last-child {
   border-radius: 0 6px 6px 0;
-}
-
-.pr-progress-bar--commit-current,
-.pr-progress-bar--commit:hover {
-  border-color: var(--pr-progress-bar-hover);
 }
 
 .pr-progress-bar--commit-reviewed {
@@ -56,6 +49,12 @@
 
 .pr-progress-bar--commit-pending {
   background-color: var(--pr-progress-bar-pending);
+}
+
+.pr-progress-bar--commit-current .pr-progress-bar--link,
+.pr-progress-bar--link:hover {
+  border: 2px solid transparent;
+  border-color: var(--pr-progress-bar-hover);
 }
 
 .pr-progress-bar--link {
