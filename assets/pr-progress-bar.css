@@ -33,19 +33,19 @@
   width: 100%;
 }
 
-.pr-progress-bar--commit:first-child {
+.pr-progress-bar--commit:first-child a {
   border-radius: 6px 0 0 6px;
 }
 
-.pr-progress-bar--commit:last-child {
+.pr-progress-bar--commit:last-child a {
   border-radius: 0 6px 6px 0;
 }
 
-.pr-progress-bar--commit-reviewed {
+.pr-progress-bar--commit-reviewed .pr-progress-bar--link {
   background-color: var(--pr-progress-bar-reviewed);
 }
 
-.pr-progress-bar--commit-current {
+.pr-progress-bar--commit-current .pr-progress-bar--link {
   background-color: var(--pr-progress-bar-current);
 }
 
