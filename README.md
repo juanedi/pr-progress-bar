@@ -4,4 +4,4 @@ Little Chrome extension that adds a progress bar when reviewing a Github PR comm
 
 Logo downloaded from http://vecteezy.com/.
 
-Test #9
+Test #10
